@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обновление 1.6.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e3192;
+            --secondary: #e74c3c;
+            --accent: #3498db;
+            --background: #0f0f1a;
+            --text: #e0e0e0;
+            --card-bg: #1a1a2e;
+            --header-bg: #161633;
+            --border: #3d3d6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIvPjxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSJub25lIi8+PHJlY3QgeD0iMjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSg0NiwgNDYsIDEwMiwgMC4xKSIvPjxyZWN0IHk9IjIwIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9InJnYmEoNDYsIDQ2LCAxMDIsIDAuMSkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=');
+            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--header-bg);
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(46, 49, 146, 0.3) 0%, rgba(231, 76, 60, 0.3) 100%);
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
+            letter-spacing: 2px;
+        }
+        
+        .version-badge {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        
+        .unit {
+            margin-bottom: 25px;
+        }
+        
+        .unit-title {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .unit-subtitle {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin: 15px 0 10px;
+            padding-left: 15px;
+            font-weight: 500;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        li::before {
+            content: "•";
+            color: var(--accent);
+            font-size: 1.5em;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        
+        .highlight {
+            background-color: rgba(231, 76, 60, 0.2);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        .summary {
+            background-color: rgba(46, 49, 146, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .summary h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .summary ol {
+            padding-left: 30px;
+        }
+        
+        .summary li {
+            padding-left: 5px;
+        }
+        
+        .summary li::before {
+            content: none;
+        }
+        
+        .new-class {
+            background: linear-gradient(135deg, rgba(46, 49, 146, 0.3) 0%, rgba(52, 152, 219, 0.3) 100%);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .new-class h3 {
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        /* Иконки */
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .icon-health {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e74c3c"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+        }
+        
+        .icon-shield {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>');
+        }
+        
+        .icon-speed {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232ecc71"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>');
+        }
+        
+        .icon-weapon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f39c12"><path d="M7 5h10v2h2V3c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v4h2V5zm10 16h-4v-1h-4v1H5v-1.41l.41-.4.59.59V14h2V9c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v5h2v5.59l.59-.59.41.41V21z"/></svg>');
+        }
+        
+        .icon-medic {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e74c3c"><path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg>');
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .unit-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <span class="version-badge">Версия 1.6.0</span>
+            <h1>Обновление Star Wars RP</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="icon icon-shield"></i>Общие изменения</h2>
+            <ul>
+                <li><span class="icon icon-health"></span><strong>Изменение здоровья персонажей:</strong> У большинства профессий базовое здоровье снижено до 100 единиц (было от 150 до 500)</li>
+                <li><span class="icon icon-weapon"></span><strong>Исправлен UI рации:</strong> Улучшен интерфейс рации для более удобного использования</li>
+                <li><span class="icon icon-shield"></span><strong>Дружественный огонь:</strong> Отныне союзники в отряде не могут нанести урон по своему товарищу</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title"><i class="icon icon-weapon"></i>501-й Легион</h2>
+            <div class="unit">
+                <h3 class="unit-subtitle">Штурмовик 501-го Легиона</h3>
+                <ul>
+                    <li><span class="icon icon-shield"></span>Увеличена броня с 150 до 250</li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость бега с 1.03 до 1.15</li>
+                    <li><span class="icon icon-weapon"></span>Добавлено оружие <span class="highlight">deployable_force_shield_augment_wep</span></li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Пилот-техник 501-го Легиона</h3>
+                <ul>
+                    <li>Удалены инструменты <span class="highlight">bricks_server_pickaxe</span> и <span class="highlight">bricks_server_axe</span></li>
+                    <li><span class="icon icon-weapon"></span>Добавлено оружие <span class="highlight">deployable_force_shield_augment_wep</span></li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Ракетчик 501-го Легиона</h3>
+                <ul>
+                    <li><span class="icon icon-weapon"></span>Добавлено оружие <span class="highlight">mortar_constructor</span></li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость бега с 1.0 до 1.1</li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость ходьбы с 0.5 до 0.65</li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Продвинутый штурмовик 501-го Легиона</h3>
+                <ul>
+                    <li><span class="icon icon-weapon"></span>Добавлены <span class="highlight">mortar_constructor</span> и <span class="highlight">deployable_force_shield_augment_wep</span></li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость бега с 1.0 до 1.15</li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость ходьбы с 0.5 до 0.6</li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Рекрутированный ПРК 501-го Легиона</h3>
+                <ul>
+                    <li><span class="icon icon-weapon"></span>Добавлены <span class="highlight">deployable_force_shield_augment_wep</span> и <span class="highlight">mortar_range_finder</span></li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость ходьбы с 0.65 до 0.75</li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость бега с 1.1 до 1.2</li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Медик 501-го Легиона</h3>
+                <ul>
+                    <li><span class="icon icon-medic"></span>Заменён <span class="highlight">tfa_fas2_ifak</span> на <span class="highlight">weapon_medkit</span></li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Перепрограммированный дроид 501-го Легиона</h3>
+                <ul>
+                    <li><span class="icon icon-weapon"></span>Добавлены <span class="highlight">deployable_force_shield_augment_wep</span> и <span class="highlight">weapon_lvsrepair</span></li>
+                    <li><span class="icon icon-health"></span>Увеличено здоровье со 120 до 150</li>
+                    <li><span class="icon icon-shield"></span>Увеличена броня со 150 до 200</li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость ходьбы с 0.69 до 0.8</li>
+                </ul>
+                
+                <div class="new-class">
+                    <h3>Новая профессия - ARF Тень 501-го Легиона</h3>
+                    <ul>
+                        <li><span class="icon icon-weapon"></span>Добавлена новая профессия с большим набором оружия и снаряжения</li>
+                        <li><span class="icon icon-health"></span>Имеет 100 здоровья и 350 брони</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title"><i class="icon icon-weapon"></i>104-й Батальон</h2>
+            <div class="unit">
+                <h3 class="unit-subtitle">Рекрутированный ПРК 104-го Батальона</h3>
+                <ul>
+                    <li><span class="icon icon-weapon"></span>Добавлено оружие <span class="highlight">deployable_force_shield_augment_wep</span></li>
+                    <li><span class="icon icon-shield"></span>Уменьшена броня с 300 до 250</li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Пилот-техник 104-го Батальона</h3>
+                <ul>
+                    <li>Удалены <span class="highlight">bricks_server_pickaxe</span> и <span class="highlight">bricks_server_axe</span></li>
+                    <li><span class="icon icon-weapon"></span>Добавлено <span class="highlight">deployable_force_shield_augment_wep</span></li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Разведчик 104-го Батальона</h3>
+                <ul>
+                    <li><span class="icon icon-weapon"></span>Добавлено оружие <span class="highlight">mortar_range_finder</span></li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Тяжеловооруженный боец 104-го Батальона</h3>
+                <ul>
+                    <li><span class="icon icon-weapon"></span>Добавлены <span class="highlight">deployable_force_shield_augment_wep</span> и <span class="highlight">mortar_constructor</span></li>
+                    <li><span class="icon icon-shield"></span>Увеличена броня с 350 до 450</li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость ходьбы с 0.45 до 0.6</li>
+                    <li><span class="icon icon-speed"></span>Увеличена скорость бега с 1.0 до 1.1</li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Санитар-инструктор 104-го Батальона</h3>
+                <ul>
+                    <li><span class="icon icon-medic"></span>Заменён <span class="highlight">tfa_fas2_ifak</span> на <span class="highlight">weapon_medkit</span></li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title"><i class="icon icon-shield"></i>УСБ</h2>
+            <div class="unit">
+                <h3 class="unit-subtitle">Медэксперт УСБ</h3>
+                <ul>
+                    <li><span class="icon icon-medic"></span>Заменён <span class="highlight">tfa_fas2_ifak</span> на <span class="highlight">weapon_medkit</span></li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Пилот-Диспетчер УСБ</h3>
+                <ul>
+                    <li>Удалены <span class="highlight">bricks_server_pickaxe</span> и <span class="highlight">bricks_server_axe</span></li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title"><i class="icon icon-shield"></i>Командование</h2>
+            <div class="unit">
+                <h3 class="unit-subtitle">Куратор Медицинской Службы</h3>
+                <ul>
+                    <li>Удалён <span class="highlight">weapon_bactainjector</span></li>
+                    <li><span class="icon icon-medic"></span>Добавлен <span class="highlight">weapon_medkit</span></li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title"><i class="icon icon-weapon"></i>Наемники</h2>
+            <div class="unit">
+                <h3 class="unit-subtitle">Мандолорец Диверсант</h3>
+                <ul>
+                    <li>Удалены <span class="highlight">bricks_server_pickaxe</span> и <span class="highlight">bricks_server_axe</span></li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Мандолорец Лекарь</h3>
+                <ul>
+                    <li><span class="icon icon-medic"></span>Заменён <span class="highlight">tfa_fas2_ifak</span> на <span class="highlight">weapon_medkit</span></li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title"><i class="icon icon-shield"></i>СТ Корпус</h2>
+            <div class="unit">
+                <h3 class="unit-subtitle">Рекрут СТ Корпуса</h3>
+                <ul>
+                    <li><span class="icon icon-weapon"></span>Добавлено оружие <span class="highlight">sw_dc15a</span> (раньше не было оружия)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title"><i class="icon icon-weapon"></i>Ивент профессии</h2>
+            <div class="unit">
+                <h3 class="unit-subtitle">Дроид коммандос - BX</h3>
+                <ul>
+                    <li><span class="icon icon-health"></span>Уменьшено здоровье с 750 до 450</li>
+                    <li><span class="icon icon-shield"></span>Уменьшена броня с 800 до 500</li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Дроид гранатомётчик</h3>
+                <ul>
+                    <li><span class="icon icon-health"></span>Уменьшено здоровье с 450 до 350</li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Дроид диверсант</h3>
+                <ul>
+                    <li><span class="icon icon-health"></span>Уменьшено здоровье с 450 до 250</li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Дроид штурмовик</h3>
+                <ul>
+                    <li><span class="icon icon-health"></span>Уменьшено здоровье с 600 до 300/350</li>
+                    <li><span class="icon icon-shield"></span>Уменьшена броня с 600 до 350</li>
+                </ul>
+                
+                <h3 class="unit-subtitle">Дроид пулеметчик</h3>
+                <ul>
+                    <li><span class="icon icon-health"></span>Уменьшено здоровье с 750 до 400</li>
+                    <li><span class="icon icon-shield"></span>Уменьшена броня с 750 до 500</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title"><i class="icon icon-shield"></i>Основные тенденции изменений</h2>
+            <div class="summary">
+                <ol>
+                    <li><span class="icon icon-health"></span>Снижение базового здоровья почти всех профессий до 100</li>
+                    <li><span class="icon icon-weapon"></span>Добавление новых видов оружия и снаряжения (особенно щитов и минометов)</li>
+                    <li><span class="icon icon-medic"></span>Замена аптечек tfa_fas2_ifak на weapon_medkit</li>
+                    <li>Удаление инструментов bricks_server_pickaxe и bricks_server_axe у некоторых профессий</li>
+                    <li><span class="icon icon-speed"></span>Корректировка скорости передвижения (в основном увеличение)</li>
+                    <li>Значительное снижение здоровья и брони у дроидов в категории "Ивент профессии"</li>
+                    <li>Добавление новой профессии ARF Тень 501-го Легиона</li>
+                </ol>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2023 Star Wars RP | Обновление 1.6.0</p>
+    </footer>
+</body>
+</html> 
